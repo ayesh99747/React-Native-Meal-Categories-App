@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import CategoriesScreen from "./screens/CategoriesScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import MealsOverviewScreen from "./screens/MealsOverview";
+import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,19 +13,27 @@ export default function App() {
             <StatusBar style="light"/>
 
             <NavigationContainer>
-                <Stack.Navigator id="main">
-                    <Stack.Screen name="Categories" component={CategoriesScreen} options={{
-                        headerStyle: {backgroundColor: '#24180f'},
-                        headerTintColor: 'white',
-                        title: 'Meal Categories',
-                        headerTitleStyle: {fontSize: 24},
-                    }}/>
-                    <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} options={{
-                        headerStyle: {backgroundColor: '#24180f'},
-                        headerTintColor: 'white',
-                        title: 'Meals Overview',
-                        headerTitleStyle: {fontSize: 24},
-                    }}/>
+                <Stack.Navigator id="main" screenOptions={{
+                    headerStyle: {backgroundColor: '#24180f'},
+                    headerTintColor: 'white',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: {fontSize: 24},
+                    contentStyle: {backgroundColor: '#3f2425'},
+                }}>
+                    <Stack.Screen name="Categories"
+                                  component={CategoriesScreen}
+                                  options={{
+                                      title: 'Meal Categories',
+                                  }}/>
+                    <Stack.Screen name="MealsOverview"
+                                  component={MealsOverviewScreen}
+                        // options={({route, navigation}) => {
+                        //     const {categoryTitle} = route.params;
+                        //     return {
+                        //         title: categoryTitle,
+                        //     }
+                        // }}
+                    />
                 </Stack.Navigator>
 
             </NavigationContainer>

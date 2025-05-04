@@ -1,10 +1,18 @@
+import {useLayoutEffect} from 'react';
 import {FlatList, StyleSheet, View} from "react-native";
 import {MEALS} from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 
 
-export default function MealsOverviewScreen({route}) {
-    const {categoryId} = route.params;
+export default function MealsOverviewScreen({route, navigation}) {
+    const {categoryId, categoryTitle} = route.params;
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: categoryTitle,
+        });
+    }, [categoryTitle, navigation]);
+
 
     const displayedMeals = MEALS.filter((meal) => {
         return meal.categoryIds.indexOf(categoryId) >= 0;
