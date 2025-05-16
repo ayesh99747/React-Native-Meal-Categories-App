@@ -1,13 +1,6 @@
-import {
-    Image,
-    Platform,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import MealDetails from "./MealDetails";
+import {Image, Platform, Pressable, StyleSheet, Text, View,} from "react-native";
+import {useNavigation} from "@react-navigation/native";
+import MealDetails from "../MealDetails";
 
 function MealItem(itemData) {
     const navigation = useNavigation();
@@ -21,14 +14,14 @@ function MealItem(itemData) {
     return (
         <View style={styles.mealItem}>
             <Pressable
-                android_ripple={{ color: "#ccc" }}
-                style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
+                android_ripple={{color: "#ccc"}}
+                style={({pressed}) => (pressed ? styles.buttonPressed : null)}
                 onPress={mealPressHandler}
             >
                 <View style={styles.innerContainer}>
                     <View>
                         <Image
-                            source={{ uri: itemData.item.imageUrl }}
+                            source={{uri: itemData.item.imageUrl}}
                             style={styles.image}
                         />
                         <Text style={styles.title}>{itemData.item.title}</Text>
@@ -56,7 +49,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         shadowColor: "black",
         shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
     },
     buttonPressed: {

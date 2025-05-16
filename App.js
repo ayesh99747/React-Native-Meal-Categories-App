@@ -8,6 +8,7 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavouritesScreen from "./screens/FavouritesScreen";
 import { Ionicons } from "@expo/vector-icons";
+import FavouritesContextProvider from "./store/context/favourites-context";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -62,47 +63,48 @@ export default function App() {
     return (
         <>
             <StatusBar style="light" />
-
-            <NavigationContainer>
-                <Stack.Navigator
-                    id="main"
-                    screenOptions={{
-                        headerStyle: { backgroundColor: "#24180f" },
-                        headerTintColor: "white",
-                        headerTitleAlign: "center",
-                        headerTitleStyle: { fontSize: 24 },
-                        contentStyle: { backgroundColor: "#3f2425" },
-                    }}
-                >
-                    <Stack.Screen
-                        name="Drawer"
-                        component={DrawerNavigator}
-                        options={{
-                            headerShown: false,
+            <FavouritesContextProvider>
+                <NavigationContainer>
+                    <Stack.Navigator
+                        id="main"
+                        screenOptions={{
+                            headerStyle: { backgroundColor: "#24180f" },
+                            headerTintColor: "white",
+                            headerTitleAlign: "center",
+                            headerTitleStyle: { fontSize: 24 },
+                            contentStyle: { backgroundColor: "#3f2425" },
                         }}
-                    />
-                    <Stack.Screen
-                        name="MealsOverview"
-                        component={MealsOverviewScreen}
-                        // options={({route, navigation}) => {
-                        //     const {categoryTitle} = route.params;
-                        //     return {
-                        //         title: categoryTitle,
-                        //     }
-                        // }}
-                    />
-                    <Stack.Screen
-                        name="MealDetail"
-                        component={MealDetailScreen}
-                        // options={({route, navigation}) => {
-                        //     const {mealId} = route.params;
-                        //     return {
-                        //         title: mealId,
-                        //     }
-                        // }}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
+                    >
+                        <Stack.Screen
+                            name="Drawer"
+                            component={DrawerNavigator}
+                            options={{
+                                headerShown: false,
+                            }}
+                        />
+                        <Stack.Screen
+                            name="MealsOverview"
+                            component={MealsOverviewScreen}
+                            // options={({route, navigation}) => {
+                            //     const {categoryTitle} = route.params;
+                            //     return {
+                            //         title: categoryTitle,
+                            //     }
+                            // }}
+                        />
+                        <Stack.Screen
+                            name="MealDetail"
+                            component={MealDetailScreen}
+                            // options={({route, navigation}) => {
+                            //     const {mealId} = route.params;
+                            //     return {
+                            //         title: mealId,
+                            //     }
+                            // }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </FavouritesContextProvider>
         </>
     );
 }
