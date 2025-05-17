@@ -1,14 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text } from "react-native";
+import {StatusBar} from "expo-status-bar";
+import {StyleSheet} from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavouritesScreen from "./screens/FavouritesScreen";
-import { Ionicons } from "@expo/vector-icons";
-import FavouritesContextProvider from "./store/context/favourites-context";
+import {Ionicons} from "@expo/vector-icons";
+import {Provider} from "react-redux";
+import {store} from "./store/redux/store";
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -16,12 +18,12 @@ function DrawerNavigator() {
     return (
         <Drawer.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: "#24180f" },
+                headerStyle: {backgroundColor: "#24180f"},
                 headerTintColor: "white",
                 headerTitleAlign: "center",
-                headerTitleStyle: { fontSize: 24 },
-                sceneStyle: { backgroundColor: "#3f2425" },
-                drawerContentStyle: { backgroundColor: "#351401" },
+                headerTitleStyle: {fontSize: 24},
+                sceneStyle: {backgroundColor: "#3f2425"},
+                drawerContentStyle: {backgroundColor: "#351401"},
                 drawerInactiveTintColor: "white",
                 drawerActiveTintColor: "#351401",
                 drawerActiveBackgroundColor: "#e4baa1",
@@ -32,7 +34,7 @@ function DrawerNavigator() {
                 component={CategoriesScreen}
                 options={{
                     title: "All Categories",
-                    drawerIcon: ({ color, size }) => (
+                    drawerIcon: ({color, size}) => (
                         <Ionicons
                             name="list-outline"
                             color={color}
@@ -46,7 +48,7 @@ function DrawerNavigator() {
                 component={FavouritesScreen}
                 options={{
                     title: "Favourite Meals",
-                    drawerIcon: ({ color, size }) => (
+                    drawerIcon: ({color, size}) => (
                         <Ionicons
                             name="star-outline"
                             color={color}
@@ -62,17 +64,18 @@ function DrawerNavigator() {
 export default function App() {
     return (
         <>
-            <StatusBar style="light" />
-            <FavouritesContextProvider>
+            <StatusBar style="light"/>
+            {/*<FavouritesContextProvider>*/}
+            <Provider store={store}>
                 <NavigationContainer>
                     <Stack.Navigator
                         id="main"
                         screenOptions={{
-                            headerStyle: { backgroundColor: "#24180f" },
+                            headerStyle: {backgroundColor: "#24180f"},
                             headerTintColor: "white",
                             headerTitleAlign: "center",
-                            headerTitleStyle: { fontSize: 24 },
-                            contentStyle: { backgroundColor: "#3f2425" },
+                            headerTitleStyle: {fontSize: 24},
+                            contentStyle: {backgroundColor: "#3f2425"},
                         }}
                     >
                         <Stack.Screen
@@ -104,7 +107,8 @@ export default function App() {
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
-            </FavouritesContextProvider>
+            </Provider>
+            {/*</FavouritesContextProvider>*/}
         </>
     );
 }
